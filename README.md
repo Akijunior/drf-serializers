@@ -16,7 +16,7 @@
 
 ### Que status codes você usaria? Ou usaria os mesmos? Pesquise e implemente;
 
-	Eu usaria 403 para o DELETE caso o filme nao tivesse sido lancao ainda, uma vez que existe uma terceiro estado para uma delecao: (O dado existe, mas possui pre-requisito para ser destruido)
+	Eu usaria 409 para o DELETE caso o filme nao tivesse sido lancao ainda, uma vez que existe uma terceiro estado para uma delecao: (O dado existe, mas possui pre-requisito para ser destruido)
 
 
 ### Retorne também uma informação descritiva ao retornar um erro de validação.

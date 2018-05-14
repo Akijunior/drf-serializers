@@ -8,7 +8,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from datetime import datetime
+from django.utils import timezone
 from .models import Game
 from .serializers import GameSerializer
 from .utils import *
@@ -58,7 +58,7 @@ def game_detail(request, pk):
         return Response(game_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     elif request.method == "DELETE":
-        if game.release_date is not None and game.release_date < datetime.now():
+        if game.release_date <= timezone.now():
             game.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response({'errors': {'release_date': 'Game nao lancado'}}, status=status.HTTP_403_FORBIDDEN)
+        return Response({'errors': {'release_date': 'Game nao lancado'}}, status=status.HTTP_409_CONFLICT)

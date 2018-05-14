@@ -2,7 +2,7 @@
 def check_valid_list(list_var, keys):
 	dict_fields = {}
 	for key in keys:
-		if list_var.get(key, None) is None:
+		if list_var.get(key, None) is None or list_var.get(key, "") == "":
 			dict_fields[key] = '%s eh requerido' % (key)
 	return dict_fields
 
