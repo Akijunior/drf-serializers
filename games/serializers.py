@@ -8,6 +8,8 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta():
         model = Game
         fields = ('id', 'name', 'release_date', 'game_category')
+        '''
         name = models.CharField(
             validators=[UniqueValidator(queryset=Game.objects.all())]
         )
+        '''

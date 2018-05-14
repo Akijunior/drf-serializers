@@ -20,7 +20,10 @@ def game_list(request):
         return Response(games_serializer.data)
     elif request.method == 'POST':
         game_serializer = GameSerializer(data=request.data)
-        
+        # Nome Unique:
+        if(not check_unique(Game, 'nome', game_serializer.data.nome)):
+            return Response({'errors': 'Nome ja utilizado'}, status=status.HTTP_400_BAD_REQUEST)
+
         if game_serializer.is_valid():
             game_serializer.save()
             return Response(game_serializer.data, status=status.HTTP_201_CREATED)
