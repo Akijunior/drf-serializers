@@ -25,7 +25,7 @@ SECRET_KEY = 'rl6c=_-3tzmx1cp$l8x4x)x3)j2rob&55y%w^@3+rf2mu+(3!1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,9 +41,10 @@ INSTALLED_APPS = [
     'games'
 ]
 
-#ROOT_URLCONF = './urls'
+ROOT_URLCONF = 'games.urls'
 
 MIDDLEWARE = [
+    'games.middlewares.CORSMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
