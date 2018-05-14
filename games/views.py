@@ -20,9 +20,17 @@ def game_list(request):
         return Response(games_serializer.data)
     elif request.method == 'POST':
         game_serializer = GameSerializer(data=request.data)
+        
+        # Null
+
+        feedback = check_valid_list(game_serializer.initial_data, ('name', 'release_date', 'game_category'))
+        
+        if feedback:
+            return Response({'errors': feedback}, status=status.HTTP_400_BAD_REQUEST)
+
         # Nome Unique:
-        if(not check_unique(Game, 'nome', game_serializer.data.nome)):
-            return Response({'errors': 'Nome ja utilizado'}, status=status.HTTP_400_BAD_REQUEST)
+        if check_unique(Game, game_serializer.initial_data['name']):
+            return Response({'errors': [{'name': 'Nome ja utilizado'}]}, status=status.HTTP_400_BAD_REQUEST)
 
         if game_serializer.is_valid():
             game_serializer.save()
