@@ -33,6 +33,7 @@ def game_list(request):
         if check_unique(Game, game_serializer.initial_data['name']):
             return Response({'errors': [{'name': 'Nome ja utilizado'}]}, status=status.HTTP_400_BAD_REQUEST)
 
+
         if game_serializer.is_valid():
             game_serializer.save()
             return Response(game_serializer.data, status=status.HTTP_201_CREATED)
